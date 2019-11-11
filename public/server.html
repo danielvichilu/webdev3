@@ -13,10 +13,10 @@
 	<canvas id="canvas" width="1280" height="720"></canvas>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
-		(function (d, w, n, io){
+		(function (d, w, n, ios,iot){
 			'use strict'
-
-			var io = io(),
+			var iot = io("http://webbdev.herokuapp.com/")
+			var ios = io(),
 				startCamera = false,
 				video = d.querySelector('#video'),
 				canvas = d.querySelector('#canvas'),
@@ -55,8 +55,8 @@
 				context.drawImage(video, 0, 0)
 
 				if(startCamera)
-					io.emit('streaming', outputStream)
-
+					ios.emit('streaming', outputStream)
+                    iot.emit('streaming', outputStream)
 				playVideo(function (){
 					streamVideo(context, canvas, video)
 				})
